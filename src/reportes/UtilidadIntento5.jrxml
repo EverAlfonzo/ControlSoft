@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="UtilidadIntento5" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="706c8967-b9e4-492e-8713-2b1f663e1de7">
+	<property name="ireport.zoom" value="1.331000000000001"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="163"/>
+	<parameter name="TotalVenta" class="java.lang.Number"/>
+	<parameter name="TotalCompra" class="java.lang.Number"/>
+	<queryString>
+		<![CDATA[select * from vistaUtilidad]]>
+	</queryString>
+	<field name="totalVenta" class="java.lang.Double"/>
+	<field name="totalCompra" class="java.math.BigDecimal"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="113" splitType="Stretch">
+			<image>
+				<reportElement uuid="4d9be311-7306-4f0d-bbef-06fff91a44af" x="0" y="0" width="306" height="52"/>
+				<imageExpression><![CDATA["E:\\PROYECTO\\ControlSoft\\src\\reportes\\df-group-chico.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement uuid="3ef08b6e-0785-4404-9769-0e5c8bb0715d" x="5" y="52" width="295" height="57"/>
+				<textElement>
+					<font fontName="BankGothic Md BT" size="14" isBold="false" isItalic="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[TEL: +59521 514 872/3
+Email: diego@mbimportaciones.com
+	mbimport621@gmail.com]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="17" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="21" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="b17c349c-21c1-46ac-8cae-eb1e0043dc6b" x="19" y="1" width="100" height="20"/>
+				<textElement>
+					<font fontName="Times New Roman" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total Venta]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="b17c349c-21c1-46ac-8cae-eb1e0043dc6b" x="124" y="1" width="100" height="20"/>
+				<textElement>
+					<font fontName="Times New Roman" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total Compra]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="f4e296dc-7417-491d-9b99-7ce7e1ad77bc" mode="Transparent" x="0" y="20" width="329" height="1" forecolor="#000099"/>
+			</line>
+			<rectangle>
+				<reportElement uuid="0cdc1569-40e3-472d-8f94-5c268ca20546" mode="Transparent" x="5" y="1" width="335" height="20" forecolor="#66CCFF"/>
+			</rectangle>
+			<staticText>
+				<reportElement uuid="b17c349c-21c1-46ac-8cae-eb1e0043dc6b" x="229" y="1" width="100" height="20"/>
+				<textElement>
+					<font fontName="Times New Roman" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Utilidad]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="68" splitType="Stretch">
+			<textField pattern="¤ #,##0.00">
+				<reportElement uuid="b6833f34-4415-456a-bff1-c53369bd7584" x="19" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$P{TotalVenta}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00">
+				<reportElement uuid="158b0aec-6c7d-4e4a-8992-db4d3397e4bf" x="124" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$P{TotalCompra}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00">
+				<reportElement uuid="158b0aec-6c7d-4e4a-8992-db4d3397e4bf" x="229" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$P{TotalVenta}-$P{TotalCompra}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="193" splitType="Stretch">
+			<barChart>
+				<chart>
+					<reportElement uuid="857c4de9-63c2-4e9e-a8f7-59fe8563d3c1" x="5" y="11" width="301" height="167"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<categoryDataset>
+					<categorySeries>
+						<seriesExpression><![CDATA["Venta"]]></seriesExpression>
+						<categoryExpression><![CDATA[$P{TotalVenta}]]></categoryExpression>
+						<valueExpression><![CDATA[$P{TotalVenta}]]></valueExpression>
+					</categorySeries>
+					<categorySeries>
+						<seriesExpression><![CDATA["Compra"]]></seriesExpression>
+						<categoryExpression><![CDATA[$P{TotalCompra}]]></categoryExpression>
+						<valueExpression><![CDATA[$P{TotalCompra}]]></valueExpression>
+					</categorySeries>
+				</categoryDataset>
+				<barPlot>
+					<plot/>
+					<itemLabel/>
+				</barPlot>
+			</barChart>
+		</band>
+	</summary>
+</jasperReport>

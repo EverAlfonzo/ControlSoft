@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="gastos" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="2c5ac9e0-3623-4e45-9ec7-2aebe4fea88e">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Title" fontName="Times New Roman" fontSize="50" isBold="true" pdfFontName="Times-Bold"/>
+	<style name="SubTitle" forecolor="#736343" fontName="Arial" fontSize="18"/>
+	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
+	<style name="Detail" fontName="Arial" fontSize="12"/>
+	<style name="Row" mode="Transparent">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+			<style backcolor="#E6DAC3"/>
+		</conditionalStyle>
+	</style>
+	<queryString>
+		<![CDATA[SELECT `gastos`.*,SUM(`detalle_gasto`.`monto`) AS gastoTotal FROM gastos,detalle_gasto
+WHERE `gastos`.`Id_gasto`=`detalle_gasto`.`Id_gasto`]]>
+	</queryString>
+	<field name="Id_gasto" class="java.lang.Integer"/>
+	<field name="Fecha_gasto" class="java.sql.Date"/>
+	<field name="obs_gasto" class="java.lang.String"/>
+	<field name="gastoTotal" class="java.lang.Double"/>
+	<group name="Fecha_gasto">
+		<groupExpression><![CDATA[$F{Fecha_gasto}]]></groupExpression>
+		<groupHeader>
+			<band height="37">
+				<frame>
+					<reportElement uuid="0731b20d-272b-4906-a8c3-25a8bb730f51" mode="Opaque" x="-21" y="7" width="597" height="24" forecolor="#B89F7D" backcolor="#F2EBDF"/>
+					<rectangle>
+						<reportElement uuid="57b6c327-954a-4778-b8fb-35605fd6da16" mode="Opaque" x="21" y="0" width="36" height="24" backcolor="#736343"/>
+						<graphicElement>
+							<pen lineWidth="0.0"/>
+						</graphicElement>
+					</rectangle>
+					<textField>
+						<reportElement uuid="86c4525c-d156-438a-b577-9279a3489857" style="SubTitle" x="68" y="0" width="413" height="24" forecolor="#736343"/>
+						<textElement>
+							<font isBold="true"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$F{Fecha_gasto}]]></textFieldExpression>
+					</textField>
+				</frame>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="6"/>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="136" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="dc9e8b65-a880-4240-924e-12c4be09e8ba" style="Title" x="170" y="0" width="263" height="62"/>
+				<textElement verticalAlignment="Middle">
+					<font pdfFontName="Times-Roman"/>
+				</textElement>
+				<text><![CDATA[Coffee Title]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="a7b1b0af-33a2-4f7b-bd47-d659d2b861c2" style="SubTitle" x="219" y="62" width="196" height="22"/>
+				<textElement>
+					<font fontName="Times New Roman" pdfFontName="Times-Roman"/>
+				</textElement>
+				<text><![CDATA[Coffee SubTitle]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="16" splitType="Stretch">
+			<line>
+				<reportElement uuid="8d1cb8f8-3d70-41eb-8856-03f4ba40886b" positionType="FixRelativeToBottom" x="0" y="15" width="555" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement uuid="46f6b9ce-98a3-4552-ba89-ca0fc0a9c075" style="Column header" x="0" y="0" width="198" height="15" forecolor="#736343"/>
+				<textElement/>
+				<text><![CDATA[Numero de gasto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="0d813d73-09ba-4cb3-8752-590708222b0f" style="Column header" x="198" y="1" width="234" height="15" forecolor="#736343"/>
+				<textElement/>
+				<text><![CDATA[Observaciones del Gasto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="0d813d73-09ba-4cb3-8752-590708222b0f" style="Column header" x="460" y="0" width="92" height="15" forecolor="#736343"/>
+				<textElement/>
+				<text><![CDATA[Gasto total]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="26" splitType="Stretch">
+			<frame>
+				<reportElement uuid="504d881d-8b2b-4079-ad87-cdb3bbb65890" style="Row" mode="Opaque" x="0" y="0" width="555" height="26"/>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="1a19d36d-3e75-464b-bf44-09d418a98b91" style="Detail" x="0" y="0" width="198" height="15"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$F{Id_gasto}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="5087a797-f232-448e-9909-7e7bae583736" style="Detail" x="198" y="0" width="234" height="26"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$F{obs_gasto}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="015b3185-f8d5-437c-b097-4d136a9e1493" x="433" y="0" width="119" height="26"/>
+					<textElement>
+						<font fontName="Arial" size="12"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{gastoTotal}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch">
+			<line>
+				<reportElement uuid="65e4b960-21b6-4092-ba6a-fca139d8b679" positionType="FixRelativeToBottom" x="0" y="3" width="555" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="25" splitType="Stretch">
+			<frame>
+				<reportElement uuid="fa0b1446-89c9-4c22-b535-80fd4c54eef4" mode="Opaque" x="-21" y="1" width="597" height="24" forecolor="#D0B48E" backcolor="#F2EBDF"/>
+				<textField evaluationTime="Report">
+					<reportElement uuid="4462ec8c-9d7b-4070-ad5d-bc5b01fb17f3" style="Column header" x="533" y="0" width="40" height="20" forecolor="#736343"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="e34c5e57-39e1-42f2-99eb-1a6a9049138b" style="Column header" x="453" y="0" width="80" height="20" forecolor="#736343"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+				</textField>
+				<textField pattern="EEEEE dd MMMMM yyyy">
+					<reportElement uuid="c2641c81-f8fb-41cb-a024-56c07b7ed9f8" style="Column header" x="22" y="1" width="197" height="20" forecolor="#736343"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>
